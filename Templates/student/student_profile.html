@@ -1,0 +1,77 @@
+{% extends "student/navbarstudent.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #8b3a93, #7fc0bb);
+    }
+    h1 {
+        margin-top: 100px;
+    }
+    h1, form {
+        margin-left: 30%;
+        max-width: 80%; 
+    }
+
+    table {
+        width: 60%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    img {
+        width: 100%; 
+        max-width: 200px; 
+        height: auto; 
+    }
+
+    a {
+        color: #eeff00; 
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        h1, form {
+            margin-left: 5%;
+            max-width: 90%;
+        }
+    }
+</style>
+
+<h1>Student Profile</h1>
+<form action="">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>{{current_student.user_member.first_name}} {{current_student.user_member.last_name}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{current_student.user_member.email}}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{current_student.number}}</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>{{current_student.age}}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><img src="{{current_student.image.url}}" alt="Profile Image"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="{% url 'edit_student_profile' %}">Edit</a></td>
+        </tr>
+        <tr>
+            <td colspan="2">{% for i in messages %}{{i}}{% endfor %}</td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

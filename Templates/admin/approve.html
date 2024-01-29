@@ -1,0 +1,108 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(to right, #3f6577, #7fc0bb);
+    }
+
+    table {
+        margin-top: 50px;
+        margin-left: 25%;
+        width: 60%;
+        border-collapse: collapse;
+        overflow-x: auto;
+        color : white;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #04aaaa;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+        color : black;
+    }
+
+    form {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    h2 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            width: 100%;
+            margin-left: 0;
+        }
+       
+    }
+</style>
+  
+
+    <table>
+        <tr>
+            <th>Usertype</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+            <th>Status</th>
+        </tr>
+        {% for user in pending_users %}
+            <tr><td>{% if user.user_type == '2' %}Teacher
+                {% else %}Student
+                {% endif %}</td>  
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <button type="submit" name="action" value="approve">Approve</button>
+                        <button type="submit" name="action" value="disapprove">Disapprove</button>
+                    </form>
+                </td>
+                <td>Pending</td>
+            </tr>
+        {% endfor %}
+        {% for user in approved_users %}
+            {% if not user.is_superuser %}
+                <tr>
+                    <td>{% if user.user_type == '2' %}Teacher
+                        {% else %}Student
+                        {% endif %}</td>  
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td></td>
+                    <td>Approved</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        <label for="">{% for i in messages %}{{i}}{% endfor %}</label>
+    </table>
+{% endblock %}

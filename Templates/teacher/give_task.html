@@ -1,0 +1,84 @@
+<!-- give_task.html -->
+
+{% extends "teacher/navbarteacher.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #105d9c, #7fc0bb);
+    }
+    div {
+        margin-left: 40%;
+        padding: 20px;
+        background-color: #ffffff3b;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width : 400px;
+    }
+    
+   h2 {
+        margin-left: 50%;
+        margin-bottom: 100px;
+   }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #0494aa;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        padding: 10px 15px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+        div {
+            margin-left: 10%;
+        }
+        h2 {
+            margin-left: 30%;
+            margin-bottom: 50px;
+   }
+    }
+</style>
+<h2>
+    Assign Task
+</h2>
+<div>
+   
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="task_name">Task Name:</label>
+        <input type="text" name="task_name" required>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" required>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" required>
+
+        <label for="assigned_students">Assigned Students:</label>
+        <select name="assigned_students" multiple required>
+            {% for student in assigned_students %}
+                <option value="{{ student.id }}">{{ student.user_member.first_name }} {{ student.user_member.last_name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Give Task">
+        <label for="">{% for i in messages %}{{i}}{% endfor %}</label>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #3f6577, #7fc0bb);
+    }
+    table {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 180px;
+        color: #ffffff;
+        background-color: #cbc57f2f;
+        border: #000000;
+    }
+    th {
+        background-color: #33596ae2;
+        color: white;
+    }
+
+</style>
+
+<form action="">
+    <table border=1>
+        <tr>
+            <th>Course</th>
+            <th>Teacher</th>
+            <th>Student</th>
+        </tr>
+        {% for i in crs %}
+            <tr>
+                <td>{{ i.course_name }}</td>
+                <td>
+                    {% for b in memb %}
+                        {% if b.user_member.user_type == '2' and b.user_course == i %}
+                            {{ b.user_member.username }}<br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for c in memb %}
+                        {% if c.user_member.user_type == '3' and c.user_course == i %}
+                            {{ c.user_member.username }}<br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</form>
+
+{% endblock %}

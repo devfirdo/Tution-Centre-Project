@@ -1,0 +1,123 @@
+{% extends "navbarhome.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        background-image : url("{% static 'images/background.png' %}");
+        margin-bottom: 70px; 
+    }
+
+    form {
+        margin-top: 100px;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        border-radius: 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    input {
+        width: calc(100% - 40px);
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding-left: 45px; 
+    }
+
+    label {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        margin-top: 11px; 
+        font-size: 15px;
+        color: #aaa;
+    }
+
+    label.user::before {
+        content: '\f007'; 
+    }
+
+    label.lock::before {
+        content: '\f084'; 
+    }
+
+    button {
+        background-color: rgb(144, 238, 225);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: green;
+        color: white;
+    }
+
+    @media (max-width: 576px) {
+        form {
+            margin-top: 50px;
+        }
+    }
+
+    footer {
+        background: linear-gradient(to right, #8eceeb, #7fc0bb);
+        color: #343a40;
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    footer i {
+        margin-right: 5px;
+    }
+</style>
+<div class="container">
+    <form action="{% url 'main_login' %}" method='post'>
+        <center><h4>Login</h4></center>
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="user"></label>
+            <input type="text" class="form-control" placeholder="   Username" name='uname'>
+        </div>
+        <div class="form-group">
+            <label class="lock"></label>
+            <input type="password" class="form-control" placeholder="   Password" name='upass'>
+        </div>
+        <button type='submit'>LOGIN</button>
+        <div class="mt-3">
+            {% for i in messages %}
+                {{ i }}
+            {% endfor %}
+        </div>
+    </form>
+</div>
+
+<footer class="text-dark py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; 2024 Academy. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p>
+                    <i class="fas fa-envelope"></i> Email: info@academy.com |
+                    <i class="fas fa-phone"></i> Phone: +123 456 7890
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}

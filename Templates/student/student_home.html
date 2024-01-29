@@ -1,0 +1,45 @@
+{% extends "student/navbarstudent.html" %}
+{% block content %}
+{% load static %}
+<style>
+    .image-container {
+        margin-left: 20%;
+        position: relative;
+    }
+
+    div img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .overlay-image {
+        top: 14%;
+        left: 18%;
+        position: absolute;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .image-container {
+            margin-left: 0;
+        }
+
+        .overlay-image {
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+           
+        }
+    }
+</style>
+
+
+<div class="image-container">
+    <img src="{% static 'images/dash8.jpg' %}" alt="">
+    <img class="overlay-image" src="{{usr.image.url}}" alt="fgggf">
+</div>
+
+
+{% endblock  %}

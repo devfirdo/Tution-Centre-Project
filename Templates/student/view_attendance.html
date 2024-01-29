@@ -1,0 +1,56 @@
+{% extends "student/navbarstudent.html" %}
+{% block content %}
+<style>
+     body {
+        background: linear-gradient(to right, #8b3a93, #7fc0bb);
+    }
+    h2 {
+        margin-left: 30%;
+        margin-top: 100px;
+    }
+    table {
+        margin-left: 30%;
+        width: 50%;
+        margin-top: 50px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+
+    @media (max-width: 768px) {
+        table {
+            margin-left: 2%;
+            width: 96%;
+        }
+
+        h2 {
+            margin-left: 2%;
+        }
+    }
+</style>
+
+<h2>View Attendance</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in attendance_records %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td>{{ record.attendance }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

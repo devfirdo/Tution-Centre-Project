@@ -1,0 +1,204 @@
+{% extends "navbarhome.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        background-image : url("{% static 'images/background.png' %}");
+        margin-bottom: 70px; 
+    }
+
+    form {
+        margin-top: 40px;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(144, 238, 225, 0.24);
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    input, select {
+        width: calc(100% - 40px);
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        padding-left: 40px; 
+    }
+
+    label {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        margin-top: 11px; 
+        font-size: 15px;
+        color: #aaa;
+    }
+
+    label.user::before,
+    label.lock::before,
+    label.envelope::before,
+    label.phone::before,
+    label.user-tag::before,
+    label.file::before,
+    label.graduation-cap::before,
+    label.id-badge::before,
+    label.user-graduate::before {
+        margin-left : 130px;
+        left: 10px; 
+    }
+
+    label.user::before {
+        content: '\f007'; 
+    }
+
+    label.lock::before {
+        content: '\f084'; 
+    }
+
+    label.envelope::before {
+        content: '\f0e0';
+    }
+
+    label.phone::before {
+        content: '\f095'; 
+    }
+
+    label.user-tag::before {
+        content: '\f500';
+    }
+
+    label.file::before {
+        content: '\f15b'; 
+    }
+
+    label.graduation-cap::before {
+        content: '\f19d'; 
+    }
+
+    label.id-badge::before {
+        content: '\f2c1'; 
+    }
+
+    label.user-graduate::before {
+        content: '\f501'; 
+    }
+
+    button {
+        background-color: rgb(144, 238, 225);
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: green;
+        color: white;
+    }
+
+    table {
+        color: white;
+    }
+
+    input[type="file"] {
+        cursor: pointer;
+    }
+
+    @media (max-width: 576px) {
+        form {
+            margin-top: 50px;
+        }
+    }
+
+    footer {
+        background: linear-gradient(to right, #8eceeb, #7fc0bb);
+        color: #343a40;
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    footer i {
+        margin-right: 5px;
+    }
+</style>
+
+<center>
+    <form action="{% url 'sregistrations' %}" enctype='multipart/form-data' method='post'>
+        <h4>Student Signup</h4>
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="user"></label>
+            <input type="text" class="form-control" placeholder="First Name" name='fname' required>
+        </div>
+        <div class="form-group">
+            <label class="user"></label>
+            <input type="text" class="form-control" placeholder="Last Name" name='lname' required>
+        </div>
+        <div class="form-group">
+            <label class="user"></label>
+            <input type="text" class="form-control" placeholder="Username" name='uname' required>
+        </div>
+        <div class="form-group">
+            <label class="user-graduate"></label>
+            <input type="number" class="form-control" placeholder="Age" name='age' required min='18' max='100'>
+        </div>
+        <div class="form-group">
+            <label class="phone"></label>
+            <input type="tel" class="form-control" pattern="[0-9]{10}" placeholder="Phone Number" name='num' required>
+        </div>
+        <div class="form-group">
+            <label class="envelope"></label>
+            <input type="email" class="form-control" placeholder="Email" name='mail' required>
+        </div>
+        <div class="form-group">
+            <label class="user-tag"></label>
+            <input type="hidden" value='3' name='text'>
+        </div>
+        <div class="form-group">
+            <label class="file"></label>
+            <input type="file" class="form-control" accept='image/*' name='image' required>
+        </div>
+        <div class="form-group">
+            <label class="graduation-cap"></label>
+            <select class="form-control" name="sel">
+                {% for i in crs %}
+                    <option value="{{i.id}}">{{i.course_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            {% for i in messages %}{{i}}{% endfor %}
+        </div>
+        <button type='submit'>SIGNUP</button>
+    </form>
+</center>
+<footer class="text-dark py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; 2024 Academy. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p>
+                    <i class="fas fa-envelope"></i> Email: info@academy.com |
+                    <i class="fas fa-phone"></i> Phone: +123 456 7890
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

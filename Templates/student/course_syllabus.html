@@ -1,0 +1,40 @@
+{% extends "student/navbarstudent.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #8b3a93, #7fc0bb);
+    }
+    div {
+        margin-left: 50%;
+    }
+
+    h2 {
+        margin-top: 200px;
+        text-align: center;
+    }
+
+    div a {
+        color: #e9e457;
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+        div {
+            margin: 10px;
+        }
+
+        h2 {
+            margin-left: 5%;
+        }
+    }
+</style>
+<h2>View Course Syllabus</h2>
+
+<div>
+    {% for assignment in assigned_courses %}
+        <a href="{{ assignment.course.get_syllabus_url }}" target="_blank">
+            {{ assignment.course.course_name }} Syllabus
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

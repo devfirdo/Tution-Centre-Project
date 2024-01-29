@@ -1,0 +1,24 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+{% load static %}
+<style>
+    div {
+        margin-left: 20%;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 768px) {
+        div {
+            margin-left: 0;
+        }
+    }
+</style>
+
+<div>
+    <img src="{% static 'images/dash1.jpg' %}" alt="">
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'student/navbarstudent.html' %}
+{% block content %}
+<style>
+    div {
+        margin-left: 30%;
+        margin-top: 100px;
+    }
+
+    form {
+        width: 50%;
+    }
+    body {
+      background: linear-gradient(to right, #8b3a93, #7fc0bb);
+    }
+
+    label, select, input, button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    select {
+        background-color: #8b3a93;
+        color: white;
+    }
+    button {
+        background-color: #7fc0bb;
+        border-radius: 20px;
+    }
+    button:hover {
+        background-color: #3f6577;
+        color : white
+    }
+
+    .submitted-label {
+        color: rgb(15, 216, 15);  
+        margin-left: 10px;
+    }
+
+    h3 {
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        div {
+            margin-left: 2%;
+            width: 96%;
+        }
+    }
+</style>
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="task_id">Select Task:</label>
+        <select name="task_id" required>
+            {% for task in tasks_to_display %}
+                <option value="{{ task.id }}">{{ task.task_name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="submitted_task_file">Submit Task (PDF only):</label>
+        <input type="file" name="submitted_task_file" accept=".pdf" required><br>
+
+        <button type="submit">Submit Task</button>
+        <label>{% for i in messages %}{{i}}{% endfor %}</label>
+    </form>
+
+    <h3>Tasks and End date:</h3>
+
+    {% for task_submission in task_submissions %}
+        {{ task_submission.task.task_name }} - {{ task_submission.task.end_date }}
+        {% if task_submission.submitted_task_file %}
+            <span class="submitted-label">Submitted</span><br>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}

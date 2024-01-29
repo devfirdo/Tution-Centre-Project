@@ -1,0 +1,67 @@
+{% extends "teacher/navbarteacher.html" %}
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(to right, #105d9c, #7fc0bb);
+    }
+    table {
+        margin-top: 150px;
+        margin-left: 30%;
+        width: 60%;
+        border-collapse: collapse;
+        
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #0478aa;
+        color: #fff;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            margin-left: 4%;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Course</th>
+                <th>Image</th>
+                <th>Contact Number</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assigned_students %}
+                <tr>
+                    <td>{{ assignment.user_member.user_member.first_name }} {{ assignment.user_member.user_member.last_name }}</td>
+                    <td>{{ assignment.course.course_name }}</td>
+                    <td><img src="{{ assignment.user_member.image.url }}" alt="{{ assignment.user_member.user_member.username }}" width="50" height="50"></td>
+                    <td>{{ assignment.user_member.number }}</td>
+                    <td>{{assignment.user_member.age}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

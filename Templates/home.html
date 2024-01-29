@@ -1,0 +1,78 @@
+{% extends "navbarhome.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        background-image : url("{% static 'images/background.png' %}")
+    }
+    footer {
+        background: linear-gradient(to right, #8eceeb, #7fc0bb);
+        color: #343a40;
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    footer i {
+        margin-right: 5px;
+    }
+</style>
+<div class="container mt-4">
+    <h1>Welcome To Our Academy</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h2>What Our Project Can Do</h2>
+            <ul>
+                <li>Efficiently manage tasks and submissions between teachers and students.</li>
+                <li>Assign tasks to specific students and track their progress.</li>
+                <li>Streamline communication and collaboration within the academic community.</li>
+                <li>Provide a platform for students to submit tasks and assignments.</li>
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <img src="{% static 'images/class.png' %}" alt="Classroom Image" class="img-fluid" style="border-radius: 8px;">
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-5">
+            <h2>Why Choose Us?</h2>
+            <p>
+                Our academy is dedicated to fostering a conducive learning environment,
+                providing top-notch education, and ensuring effective communication
+                between teachers and students.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/learn.png' %}" alt="Learning Image" class="img-fluid" style="border-radius: 8px;">
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to reach out to us.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="text-dark py-3" style='background: linear-gradient(to right, #8eceeb, #7fc0bb);'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; 2024 Academy. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p>Email: info@academy.com | Phone: +123 456 7890</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock  %}

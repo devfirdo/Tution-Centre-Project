@@ -1,0 +1,54 @@
+{% extends "teacher/navbarteacher.html" %}
+{% block content %}
+
+<style>
+
+    body {
+        background: linear-gradient(to right, #105d9c, #7fc0bb);
+    }
+    table {
+        color : white;
+        margin-left: 30%;
+        width: 60%;
+        border-collapse: collapse;
+        margin-top: 100px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #048caa;
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            margin-left: 15%;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in teacher_attendance %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td>{{ record.attendance }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

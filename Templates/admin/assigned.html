@@ -1,0 +1,125 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #3f6577, #7fc0bb);
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    form {
+        margin-top: 70px;
+        margin-left: 25%;
+    }
+
+    table {
+        margin-top: 20px;
+        width: 80%;
+        border-collapse: collapse;
+        color : white;
+        overflow-x: auto;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+        color : black;
+    }
+
+    td img {
+        max-width: 50px;
+        max-height: 50px;
+        display: block;
+        margin: auto;
+    }
+
+    select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+        form {
+        
+        margin-left: 0;
+    }
+    }
+</style>
+
+<form method="post" action="{% url 'assign_teachers' %}">
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <th>Course</th>
+            <th>Student</th>
+            <th>Student Image</th>
+            <th>Teacher</th>
+            <th>Current Teacher</th>
+            <th>Action</th>
+        </tr>
+        {% for course in crs %}
+            {% for student in std %}
+                {% if course.id == student.user_course.id %}
+                    <tr>
+                        <td>{{ course.course_name }}</td>
+                        <td>{{ student.user_member.username }}</td>
+                        <td>
+                            {% if student.image %}
+                                <img src="{{ student.image.url }}" alt="{{ student.user_member.username }} Image">
+                            {% else %}
+                                No Image
+                            {% endif %}
+                        </td>
+                        <td>
+                            <select name="teacher_name_{{ course.id }}_{{ student.id }}" id="">
+                                {% for teacher in tcr %}
+                                    {% if teacher.user_member.user_type == '2' and teacher.user_course == course %}
+                                        <option value="{{ teacher.user_member.id }}">{{ teacher.user_member.username }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            {% if student.current_assignment %}
+                                {{ student.current_assignment.user_teacher.username }}
+                            {% else %}
+                                No Assignment
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button type="submit" name="assign" value="{{ course.id }}_{{ student.id }}">Assign</button>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </table>
+</form>
+
+{% endblock %}

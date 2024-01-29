@@ -1,0 +1,71 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #3f6577, #7fc0bb);
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+    }
+
+    table {
+        margin-top: 200px;
+        width: 60%;
+        margin-left: 30%;
+        border-collapse: collapse;
+        background-color: #ffffff39;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    p {
+        margin-top: 20px;
+        margin-left: 20%;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            width: 90%;
+            margin-left: 5%;
+        }
+
+        p {
+            margin-left: 5%;
+        }
+    }
+</style>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Attendance Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in atr %}
+            <tr>
+                <td>{{ record.teacher_name.first_name }} {{ record.teacher_name.last_name }}</td>
+                <td>{{ record.date }}</td>
+                <td>{{ record.attendance }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

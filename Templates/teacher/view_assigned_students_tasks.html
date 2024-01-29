@@ -1,0 +1,31 @@
+{% extends 'teacher/navbarteacher.html' %}
+{% block content %}
+<style>
+  div {
+    margin-left: 30%;
+    width: 60%;
+    margin-top: 50px;
+    color : white;
+  }
+  a {
+    color: rgb(255, 187, 14);
+  }
+  body {
+    background: linear-gradient(to right, #105d9c, #7fc0bb);
+  }
+</style>
+<div>
+  <h2>Assigned Students' Tasks</h2>
+
+  {% for task_submission in tasks_submissions %}
+    <p>
+      Student: {{ task_submission.user_member.user_member.get_full_name }}<br>
+      Task: {{ task_submission.task.task_name }}<br>
+      Submitted on: {{ task_submission.submitted_task_file.created_at }}
+      {% if task_submission.submitted_task_file %}
+        <a href="{% url 'view_submitted_pdf' task_submission.id %}" target="_blank">View Task</a>
+      {% endif %}
+    </p>
+  {% endfor %}
+</div>  
+{% endblock %}

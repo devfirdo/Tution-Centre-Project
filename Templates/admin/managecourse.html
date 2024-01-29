@@ -1,0 +1,77 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #3f6577, #7fc0bb);
+    }
+    table {
+        color : white;
+        margin-top : 14%;
+        margin-left: 35%;
+        max-width: 60%;
+        border-collapse: collapse;
+        background-color: #04504843;
+        
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #0491aa;
+        color: white;
+    }
+
+    h2 {
+        margin-left: 10%;
+    }
+
+    a {
+        text-decoration: none;
+        color: #ddff00;
+    }
+
+    a:hover {
+        color: #045049;
+    }
+
+    @media (max-width: 768px) {
+        table {
+            width: 90%;
+        }
+
+        table {
+            margin-left: 0;
+        }
+    }
+</style>
+
+<div>
+
+
+<table border=1>
+    <tr>
+        <th>Course Name</th>
+        <th>Course Fee</th>
+        <th>Course Duration</th>
+        <th>Syllabus</th>
+        <th>Action</th>
+    </tr>
+    {% for i in crs %}  
+    <tr>
+        <td>{{ i.course_name }}</td>
+        <td>{{ i.course_fee }}</td>
+        <td>{{ i.course_duration }}</td>
+        <td>{{ i.syllabus }}</td>
+        <td>
+            <a href="{% url 'delete_course' i.id %}">Delete</a><br>
+            <a href="{% url 'edit_course' i.id %}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

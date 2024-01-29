@@ -1,0 +1,108 @@
+{% extends "teacher/navbarteacher.html" %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #105d9c, #7fc0bb);
+    }
+    form {
+        margin-left: 40%;
+        max-width: 20%;
+        margin-top: 200px;
+        padding: 20px;
+       
+    }
+
+    table {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff4e;
+        max-width: 100%;
+    }
+
+    td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .radio-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .radio-group input {
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    span {
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    button {
+        background-color: #0489aa;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+        form {
+            margin-top: 20px;
+            margin-left: 0;
+            width: 90%;
+        }
+        
+    }
+</style>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Student Name:</td>
+            <td>
+                <select name="sel" required>
+                    <option value="">Select Student</option>
+                    {% for student in students_assigned %}
+                        <option value="{{ student.id }}">{{ student.user_member.username }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td><input type="date" name="date" required></td>
+        </tr>
+        <tr>
+            <td>Attendance:</td>
+            <td class="radio-group">
+                <input type="radio" name="attendance" value="present"> <span>Present</span>
+                <input type="radio" name="attendance" value="absent"> <span>Absent</span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+        <tr>
+            <td>{% for i in messages %}{{i}}{% endfor %}</td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

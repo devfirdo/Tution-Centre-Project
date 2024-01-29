@@ -1,0 +1,95 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        background:  linear-gradient(to right, #3f6577, #7fc0bb);
+    }
+
+    div {
+        margin-left: 47%;
+    }
+
+    form {
+        margin-top: 200px;
+        width: 40%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff2b;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #078c8e;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+        div {
+            margin-left: 5%;
+        }
+
+        form {
+            width: 90%;
+        }
+    }
+</style>
+
+<div>
+    <form action="{% url 'reg_course' %}" method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><input type="text" placeholder='Course Name' name ='acourse'></td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="sel" id="">
+                        <option value="">Duration</option>
+                        <option value="three">3 Months</option>
+                        <option value="four">4 Months</option>
+                        <option value="six">6 Months</option>
+                        <option value="eight">8 Months</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="file" placeholder='Syllabus' name='syllabus' accept=".pdf"></td>
+            </tr>
+            <tr>
+                <td><input type="number" placeholder='Course Fee' name='acoursefee'></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+            <tr>
+                <td>{% for i in messages %}{{i}}{% endfor %}</td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

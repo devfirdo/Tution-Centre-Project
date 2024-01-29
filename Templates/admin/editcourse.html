@@ -1,0 +1,104 @@
+{% extends "admin/navbaradmin.html" %}
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #3f6577, #7fc0bb);
+    }
+
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #0489aa;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    form {
+        margin-top: 100px;
+        margin-bottom: 20px;
+        width : 40%;
+        margin-left: 40%;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #04AA6D;
+        color: white;
+        cursor: pointer;
+        width: auto;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+
+    @media (max-width: 768px) {
+        table, form {
+            width: 90%;
+            margin-left: 5%;
+        }
+
+        h2 {
+            margin-left: 5%;
+        }
+    }
+</style>
+
+
+<form action="{% url 'update_course' crs.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border=1>
+        <tr>
+            <th>Course Name</th>
+            <td><input type="text" value="{{crs.course_name}}" name="nme"></td>
+        </tr>
+        <tr>
+            <th>Course Fee</th>
+            <td><input type="text" value="{{crs.course_fee}}" name="fee"></td>
+        </tr>
+        <tr>
+            <th>Course Duration</th>
+            <td>
+                <select name="duration" id="sel">
+                    {% for duration in all_durations %}
+                        <option value="{{ duration.course_duration }}" {% if duration.course_duration == crs.course_duration %}selected{% endif %}>
+                            {{ duration.course_duration }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Syllabus</th>
+            <td>
+                <input type="text" value="{{ crs.syllabus }}" name="syl">
+                <input type="file" name="syllabus_pdf">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Update"></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

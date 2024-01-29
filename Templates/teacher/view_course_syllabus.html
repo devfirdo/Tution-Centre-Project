@@ -1,0 +1,27 @@
+{% extends "teacher/navbarteacher.html" %}
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(to right, #105d9c, #7fc0bb);
+    }
+    div a {
+        text-decoration: none;
+        color: rgb(227, 205, 36);
+    }
+    div {
+        margin-top: 100px;
+        margin-left : 30%;
+    }
+    
+</style>
+   
+    <div>
+        <h2>View Course Syllabus</h2>
+        {% for assignment in assigned_courses %}
+            <a href="{{ assignment.course.get_syllabus_url }}" target="_blank">
+                {{ assignment.course.course_name }} Syllabus
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
